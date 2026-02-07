@@ -287,11 +287,28 @@ if __name__ == "__main__":
         name: player["total_score"] 
         for name, player in data["players"].items()
     }
+    count = 0
+    category = {
+        'high': sum(1 for score in data['players'].values()
+                    if score['total_score'] > 5000),
+        'medium': sum(1 for score in data['players'].values()
+                      if 2000 <= score['total_score'] <= 5000),
+        'low': sum(1 for score in data['players'].values()
+                   if score['total_score'] < 2000)
+    }
+    achievement = {
+        name: player["achievements_count"]
+        for name, player in data["players"].items()
+    }
     print(f"High scorers (>2000): {high_score}")
     print(f"Scores doubled: {score_doubled}")
     print(f"Active players: {active_players}\n")
 
     print(f"Player scores: {scores}")
+    print(f"Score categories: {category}")
+    print(f"Achievement counts: {achievement}\n")
+
+
 
 
 # === Game Analytics Dashboard ===

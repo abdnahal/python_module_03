@@ -1,4 +1,4 @@
-def rare_achievements(players):
+def rare_achievements(players: dict) -> set:
     all_achievements = set()
 
     for achievements in players.values():

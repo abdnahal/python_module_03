@@ -16,8 +16,8 @@ def parse_coord(str: str) -> tuple:
         cord = tuple(map(int, cord))
     except ValueError as e:
         print(f"Error parsing coordinates: {e}")
-        print(f"Error details - type: {type(e).__name__}, Args: {e}")
-        return 0
+        print(f"Error details - type: {type(e).__name__}, Args: ({e})\n")
+        return (0)
     return (cord)
 
 
@@ -39,6 +39,9 @@ if __name__ == "__main__":
         print(f"Parsed position: {coord}")
         distance = calculate_distance(coord)
         print(f"Distance between (0, 0, 0) and {coord}: {distance}\n")
+
+    print("Parsing invalid coordinates: abc,def,ghi")
+    parse_coord("abc,def,ghi")
 
     print("Unpacking demonstration:")
     if coord:

@@ -6,11 +6,11 @@ if __name__ == "__main__":
     ac = len(args)
     if ac < 2:
         print("No arguments provided!")
-    print(f"Program name: {args[0]}")
+    print(f"Program name: {sys.argv[0]}")
     if ac > 1:
-        print(f"Arguments received: {ac - 1}")
+        print(f"Arguments received: {ac}")
         i = 1
         for arg in args:
             print(f"Argument {i}: {arg}")
             i += 1
-    print(f"Total arguments: {ac}")
+    print(f"Total arguments: {ac + 1}")

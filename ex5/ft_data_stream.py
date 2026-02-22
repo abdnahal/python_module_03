@@ -7036,8 +7036,11 @@ def event_count(data: dict, events: str) -> int:
                 count += 1
     return count
 
-def fibonacci() -> int:
-    
+def fibonacci(n):
+    a, b = 0, 1
+    for _ in range(n):
+        yield a
+        a, b = b, a + b
 
 
 if __name__ == "__main__":

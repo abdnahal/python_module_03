@@ -20,13 +20,13 @@ def restock(inventory: dict) -> list:
 
 
 def get_min(inventory: dict) -> str:
-    min = ""
-    temp = 1
+    minor = ""
+    temp = min(inventory.values())
     for key in inventory.keys():
-        if inventory[key] <= temp:
+        if inventory[key] == temp:
             temp = inventory[key]
-            min = key
-    return (min)
+            minor = key
+    return (minor)
 
 
 def get_moderate(inventory: dict) -> dict:
@@ -67,8 +67,8 @@ if __name__ == "__main__":
         print("=== Inventory Statistics ===")
         max = max(inventory.values())
         print(f"Most abundant: {get_max(inventory)} ({max} units)")
-        min = min(inventory.values())
-        print(f"Least abundant: {get_min(inventory)} ({min} units)")
+        minor = min(inventory.values())
+        print(f"Least abundant: {get_min(inventory)} ({minor} units)")
         print("=== Item Categories ===")
         print(f"Moderate: {get_moderate(inventory)}")
         print(f"Scarce: {get_scarce(inventory)}\n")

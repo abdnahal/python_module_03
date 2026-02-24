@@ -7002,7 +7002,7 @@ data = [
 ]
 
 
-def game_events(n: int) -> str:
+def game_events(n: int) -> any:
     for i in range(n):
         if data[i]["event_type"] == "death":
             message = "died"
@@ -7020,7 +7020,8 @@ def game_events(n: int) -> str:
             message = "event occurred"
 
         event_data = data[i]
-        output = f"Event {event_data['id']}: Player {event_data['player']} (level {event_data['data']['level']}) {message}"
+        output = f"Event {event_data['id']}: Player {event_data['player']}\
+(level {event_data['data']['level']}) {message}"
         yield output
 
 
@@ -7036,7 +7037,26 @@ def event_count(data: dict, events: str) -> int:
                 count += 1
     return count
 
-def fibonacci(n):
+
+def is_prime(n: int) -> int:
+    for i in range(2, n):
+        if n % i == 0:
+            return 0
+    return 1
+
+
+def prime(n: int) -> any:
+    count = 0
+    num = 2
+
+    while count < n:
+        if is_prime(num):
+            yield num
+            count += 1
+        num += 1
+
+
+def fibonacci(n: int) -> any:
     a, b = 0, 1
     for _ in range(n):
         yield a
@@ -7053,15 +7073,9 @@ if __name__ == "__main__":
     print(f"Total events processed {len(data)}")
     print(f"High-level players (10+): {event_count(data, "level")}")
     print(f"Treasure events: {event_count(data, "item_found")}")
-    print(f"Level_up events: {event_count(data, "level_up")}")
-
-
-# === Stream Analytics ===
-# Total events processed: 1000
-# High-level players (10+): 342
-# Treasure events: 89
-# Level-up events: 156
-# Memory usage: Constant (streaming)
-# Processing time: 0.045 seconds
-# === Generator Demonstration ===
-# Fibonacci sequence (first 10): 0, 1, 1, 2
+    print(f"Level_up events: {event_count(data, "level_up")}\n")
+    print("=== Generator Demonstration ===")
+    fib = [_ for _ in fibonacci(10)]
+    print(f"Fibonacci sequence (first 10): {fib}")
+    prim = [_ for _ in prime(5)]
+    print(f"Prime numbers (first 5): {prim}")

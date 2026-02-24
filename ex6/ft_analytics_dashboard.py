@@ -266,6 +266,15 @@ data = {
         "combo_king",
         "explorer",
     ],
+    "regions": [
+        "north",
+        "south",
+        "east",
+        "west",
+        "central",
+        "east",
+        "north",
+    ],
 }
 
 if __name__ == "__main__":
@@ -284,7 +293,7 @@ if __name__ == "__main__":
 
     ]
     scores = {
-        name: player["total_score"] 
+        name: player["total_score"]
         for name, player in data["players"].items()
     }
     count = 0
@@ -300,32 +309,33 @@ if __name__ == "__main__":
         name: player["achievements_count"]
         for name, player in data["players"].items()
     }
+    unique_players = {name for name in data["players"].keys()}
+    unique_achievements = {ach for ach in data["achievements"]}
+    active_regions = {reg for reg in data["regions"]}
+    print("=== Game Analytics Dashboard ===\n")
+    print("=== List Comprehension Examples ===")
     print(f"High scorers (>2000): {high_score}")
     print(f"Scores doubled: {score_doubled}")
     print(f"Active players: {active_players}\n")
 
+    print("=== Dict Comprehension Examples ===")
     print(f"Player scores: {scores}")
     print(f"Score categories: {category}")
     print(f"Achievement counts: {achievement}\n")
 
+    print("=== Set Comprehension Examples ===")
+    print(f"Unique players: {unique_players}")
+    print(f"Unique achievements: {unique_achievements}")
+    print(f"Active regions: {active_regions}\n")
 
-
-
-# === Game Analytics Dashboard ===
-# === List Comprehension Examples ===
-# High scorers (>2000): ['alice', 'charlie', 'diana']
-# Scores doubled: [4600, 3600, 4300, 4100]
-# Active players: ['alice', 'bob', 'charlie']
-# === Dict Comprehension Examples ===
-# Player scores: {'alice': 2300, 'bob': 1800, 'charlie': 2150}
-# Score categories: {'high': 3, 'medium': 2, 'low': 1}
-# Achievement counts: {'alice': 5, 'bob': 3, 'charlie': 7}
-# === Set Comprehension Examples ===
-# Unique players: {'alice', 'bob', 'charlie', 'diana'}
-# Unique achievements: {'first_kill', 'level_10', 'boss_slayer'}
-# Active regions: {'north', 'east', 'central'}
-# === Combined Analysis ===
-# Total players: 4
-# Total unique achievements: 12
-# Average score: 2062.5
-# Top performer: alice (2300 points, 5 achievements)
+    print("=== Combined Analysis ===")
+    print(f"Total players: {len(unique_players)}")
+    print(f"Total unique achievements: {len(unique_achievements)}")
+    avg_score = sum(scores.values()) / len(scores.keys())
+    print(f"Average score: {round(avg_score, 1)}")
+    performer = [key for key in scores.keys()
+                 if scores[key] == max(scores.values())]
+    stats = f"{data['players'][performer[0]]["achievements_count"]}"
+    fin = f"{performer[0]} ({scores[performer[0]]} points, \
+{stats} achievements)"
+    print(f"Top performer: {fin}")
